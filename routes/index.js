@@ -6,6 +6,9 @@ var router = express.Router();
 
 router.get(api.list,list.fetchAll);
 router.get(api.getSourceCode, index.getSourceCode);
+router.post(api.feedBackList, index.getFeedBackList);
+router.post(api.saveFeedBack, index.saveFeedBackItem);
+router.post(api.saveResponse, index.saveResponseItem);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
