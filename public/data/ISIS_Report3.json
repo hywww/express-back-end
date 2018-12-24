@@ -7,7 +7,7 @@
     "author":"郝永红,谢荣钦",
     "keyboard":"",
     "test":"李巧利, 陶力",
-    "function":"生成Table , Listing , Figure",
+    "function":"生成Table , Listing , Figure, 生成Table",
     "parameterIntro":[{
         "kinds": "标题",
         "name": "Title=",
