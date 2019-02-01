@@ -3,9 +3,9 @@ let func = require('../sql/func');
 
 module.exports = {
     fetchAll(req,res){
-        func.connPool(sql.queryAll, (error,rows) =>{
-            console.log(error)
-            res.json({code: 200, msg: 'ok', list: rows})
+        func.connPool(sql.queryAll, (result) =>{
+            console.log(result)
+            res.json({code: 200, msg: 'ok', list: result})
         })
     }
 }

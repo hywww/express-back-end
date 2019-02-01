@@ -1,22 +1,32 @@
-let mysql = require('mysql');
-let db = require('../configs/db');
+let mysql = require('mssql');
+// let db = require('../configs/db');
 
-let pool = mysql.createPool(db);
+let pool = mysql.connect('mssql://sa:Gcp0123@localhost/macro');
 module.exports = {
     connPool (sql , cb) {
-        pool.getConnection((error, conn)=>{
-            let q = conn.query(sql, (err, rows) => {
-
-                if (err) {
+        pool.then(()=>{
+            new mysql.Request()
+                .query(sql).then((rows) => {
+                    console.log(rows);
+                    cb(rows);
+                }).catch((err) => {
                     console.log(err);
-                }
+                    cb(err);
+                })
+            // let q = conn.query(sql, (err, rows) => {
+            //     if (err) {
+            //         console.log(err);
+            //     }
 
-                console.log(rows);
+            //     console.log(rows);
 
-                cb(err, rows);
+            //     cb(err, rows);
 
-                conn.release();
-            });
+            //     conn.release();
+            // });
+        }).catch((err) => {
+            console.log(err);
+            cb(err);
         })
     }
 }
