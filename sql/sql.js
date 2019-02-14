@@ -1,6 +1,8 @@
 
 module.exports = {
-    queryAll: 'SELECT TOP 1000 [MacroName],[M_Exam_Note],[M_Example],[M_Exam_pic],[M_Exam_Note1] FROM [macro].[dbo].[example$]',
-    queryById: 'SELECT * FROM ?? WHERE id=?',
+    queryList: 'SELECT * FROM [macro].[dbo].[toc$]',
+    queryNameDetail: "SELECT * FROM [macro].[dbo].[toc$] where MacroName = ",
+    querySyntax: "SELECT * FROM [macro].[dbo].[syntax$] where MacroName = ",
+    queryParam: "SELECT * FROM [macro].[dbo].[param$] where MacroName = ",
     del: 'DELETE FROM ?? WHERE id=?',
 };
