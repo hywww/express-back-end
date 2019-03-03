@@ -1,9 +1,17 @@
 const fs = require('fs')
+const path = require('path')
 const extraFs = require('fs-extra')
 module.exports = {
     getSourceCode(req,res){
         try {
-            fs.readFile('public/data/code/aelcr.sas', 'utf8', (err, data)=>{
+            let name = req.query.name.toLowerCase();
+            const type = req.query.type;
+            if (name[0] === '%') {
+                name = name.substring(1);
+            }
+            name = name.replace(/_/g, '-'); // 替换下划线
+            name = name.replace(/ /g, ''); // 替换空格
+            fs.readFile(path.join(__dirname, `../../../production/${type}/${name}.sas`), 'utf8', (err, data)=>{
                 if(err) throw err;
                 res.json({status: 200, msg: 'ok', result: data})
             });
