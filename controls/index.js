@@ -20,7 +20,7 @@ module.exports = {
         }
     },
     saveFeedBackItem(req,res){
-        extraFs.readJson('public/data/problemList.json')
+        extraFs.readJson('configs/data/problemList.json')
         .then( data => {
             let dataJson = data;
             if (!dataJson[req.body.id]) {
@@ -29,7 +29,7 @@ module.exports = {
             req.body.resId = (new Date()).valueOf();
             req.body.children = [];
             dataJson[req.body.id].push(req.body);
-            extraFs.writeJson('public/data/problemList.json',dataJson)
+            extraFs.writeJson('configs/data/problemList.json',dataJson)
             .then(()=>{
                 res.json({status: 200, msg: '保存成功'})
             })
@@ -42,7 +42,7 @@ module.exports = {
         })
     },
     saveResponseItem(req,res){
-        extraFs.readJson('public/data/problemList.json')
+        extraFs.readJson('configs/data/problemList.json')
         .then( data => {
             let dataJson = data;
             console.log(dataJson[req.body.id])
@@ -51,7 +51,7 @@ module.exports = {
                     item.children.push(req.body)
                 }
             })
-            extraFs.writeJson('public/data/problemList.json',dataJson)
+            extraFs.writeJson('configs/data/problemList.json',dataJson)
             .then(()=>{
                 res.json({status: 200, msg: '保存成功'})
             })
@@ -64,7 +64,7 @@ module.exports = {
         })
     },
     getFeedBackList(req, res) {
-        extraFs.readJson('public/data/problemList.json')
+        extraFs.readJson('configs/data/problemList.json')
         .then((data)=>{
             // const dataJson = JSON.parse(data);
             res.json({status: 200, result: data[req.body.name]} || [])
