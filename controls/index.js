@@ -6,12 +6,15 @@ module.exports = {
         try {
             let name = req.query.name.toLowerCase();
             const type = req.query.type;
+            let version = (req.query.version).toLowerCase();
             if (name[0] === '%') {
                 name = name.substring(1);
             }
             name = name.replace(/_/g, '-'); // 替换下划线
             name = name.replace(/ /g, ''); // 替换空格
-            fs.readFile(path.join(__dirname, `../../../production/${type}/${name}.sas`), 'utf8', (err, data)=>{
+            version = version.replace(/\./g, '-'); // 替换.为-
+
+            fs.readFile(path.join(__dirname, `../../../production/${type}/${name}-${version}.sas`), 'utf8', (err, data)=>{
                 if(err) throw err;
                 res.json({status: 200, msg: 'ok', result: data})
             });
