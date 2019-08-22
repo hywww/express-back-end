@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get(api.list,list.fetchAll);
 router.get(api.getDetail,list.fetchDetail);
-router.get(api.getSyntax,list.fetchSyntax);
+router.get(api.getSyntax,index.getSyntax);
 router.get(api.getParam,list.fetchParam);
 router.get(api.getSourceCode, index.getSourceCode);
 router.post(api.feedBackList, index.getFeedBackList);
