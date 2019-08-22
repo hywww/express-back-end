@@ -22,8 +22,42 @@ module.exports = {
             res.json({status: 501, msg: '读取数据错误', err: err})
         }
     },
+    getSyntax(req,res){
+        try {
+            let name = req.query.name.toLowerCase();
+            const type = req.query.type;
+            if (name[0] === '%') {
+                name = name.substring(1);
+            }
+            name = name.replace(/-/g, '_'); // 替换横杠
+            name = name.replace(/ /g, ''); // 替换空格
+            fs.readFile(path.join(__dirname, `../../../production-text/${name}.txt`), 'utf8', (err, data)=>{
+                if(err) throw err;
+                res.json({status: 200, msg: 'ok', result: data})
+            });
+        } catch (err) {
+            res.json({status: 501, msg: '读取数据错误', err: err})
+        }
+    },
+    getExample(req,res){
+        try {
+            let name = req.query.name.toLowerCase();
+            const type = req.query.type;
+            if (name[0] === '%') {
+                name = name.substring(1);
+            }
+            name = name.replace(/-/g, '_'); // 替换横杠
+            name = name.replace(/ /g, ''); // 替换空格
+            fs.readFile(path.join(__dirname, `../../../production-pdf/${name}.pdf`), 'binary', (err, data)=>{
+                if(err) throw err;
+                res.json({status: 200, msg: 'ok', result: data})
+            });
+        } catch (err) {
+            res.json({status: 501, msg: '读取数据错误', err: err})
+        }
+    },
     saveFeedBackItem(req,res){
-        extraFs.readJson('configs/data/problemList.json')
+        extraFs.readJson('public/data/problemList.json')
         .then( data => {
             let dataJson = data;
             if (!dataJson[req.body.id]) {
@@ -32,7 +66,7 @@ module.exports = {
             req.body.resId = (new Date()).valueOf();
             req.body.children = [];
             dataJson[req.body.id].push(req.body);
-            extraFs.writeJson('configs/data/problemList.json',dataJson)
+            extraFs.writeJson('public/data/problemList.json',dataJson)
             .then(()=>{
                 res.json({status: 200, msg: '保存成功'})
             })
@@ -45,7 +79,7 @@ module.exports = {
         })
     },
     saveResponseItem(req,res){
-        extraFs.readJson('configs/data/problemList.json')
+        extraFs.readJson('public/data/problemList.json')
         .then( data => {
             let dataJson = data;
             console.log(dataJson[req.body.id])
@@ -54,7 +88,7 @@ module.exports = {
                     item.children.push(req.body)
                 }
             })
-            extraFs.writeJson('configs/data/problemList.json',dataJson)
+            extraFs.writeJson('public/data/problemList.json',dataJson)
             .then(()=>{
                 res.json({status: 200, msg: '保存成功'})
             })
@@ -67,7 +101,7 @@ module.exports = {
         })
     },
     getFeedBackList(req, res) {
-        extraFs.readJson('configs/data/problemList.json')
+        extraFs.readJson('public/data/problemList.json')
         .then((data)=>{
             // const dataJson = JSON.parse(data);
             res.json({status: 200, result: data[req.body.name]} || [])
