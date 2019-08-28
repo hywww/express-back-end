@@ -49,6 +49,13 @@ module.exports = {
             res.json({code: 200, root, result: recordset[0]})
         })
     },
+    fetchHistory(req,res){
+        const params = req.query.name;
+        func.connPool(`${sql.history}'${params}'`, (result) =>{
+            const { recordset, root } = result;
+            res.json({code: 200, root, result: recordset})
+        })
+    },
     fetchParam(req,res){
         const params = req.query.name;
         func.connPool(`${sql.queryParam}'${params}'`, (result) =>{
