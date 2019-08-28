@@ -109,5 +109,20 @@ module.exports = {
         .catch((err)=>{
             res.json({status: 502, msg: '读取json失败', err: err})
         })
-    }
+    },
+    // 读取版本历史的详情文件
+    getHistoryVersionCode(req,res){
+      try {
+          let name = req.query.name; // 入参
+          if (name[0] === '%') {
+            name = name.substring(1);
+        }
+          fs.readFile(path.join(__dirname, `../../../macro_version/${name}`), 'utf8', (err, data)=>{
+              if(err) throw err;
+              res.json({status: 200, msg: 'ok', result: data})
+          });
+      } catch (err) {
+          res.json({status: 501, msg: '读取数据错误', err: err})
+      }
+  },
 }
