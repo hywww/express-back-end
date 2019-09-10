@@ -5,5 +5,6 @@ module.exports = {
     querySyntax: "SELECT * FROM [macro].[dbo].[toc$] where MacroName = ",
     queryParam: "SELECT * FROM [macro].[dbo].[param$] where MacroName = ",
     history:"SELECT * FROM [macro].[dbo].[history_$] where MacroName = ",
+    functionDemoDetail:"SELECT * FROM [macro].[dbo].[dlink$] where MacroName = ",
     del: 'DELETE FROM ?? WHERE id=?',
 };
