@@ -7,6 +7,7 @@ module.exports = {
     getSyntax: path + '/get/list/syntax',
     getParam: path + '/get/list/param',
     getHistory: path + '/get/list/history',
+    getLink: path + '/get/list/functionDemoDetail',
     getHistoryVersionCode: path + '/get/history/detail',
     getSourceCode: path + '/get/sourceCode',
     saveFeedBack: path + '/save/feedback/item',
